@@ -1,24 +1,38 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { AiOutlineGooglePlus, AiOutlineGithub } from 'react-icons/ai'
-import { FiFacebook } from 'react-icons/fi'
-import { CiTwitter } from 'react-icons/ci'
+import { AiOutlineGooglePlus, AiOutlineGithub } from "react-icons/ai";
+import { FiFacebook } from "react-icons/fi";
+import { CiTwitter } from "react-icons/ci";
 
 const Login = () => {
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
+  console.log(formData);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("Login Clicked");
+  };
+  const handleInput = (e) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      [e.target.name]: e.target.value,
+    }));
+  };
+
   return (
     <div className="min-w-screen min-h-screen bg-[#161d31] flex justify-center items-center">
       <div className="w-[350px] text-[#d0d2d6] p-2">
         <div className="bg-[#283046] p-4 rounded-md">
           <h2 className="text-xl mb-3">Welcome to Ottos</h2>
-          <p className="text-sm mb-3">
-            Please sign in to your account
-          </p>
-          <form>
+          <p className="text-sm mb-3">Please sign in to your account</p>
+          <form onSubmit={handleSubmit}>
             <div className="flex flex-col w-full gap-1 mb-3">
               <label htmlFor="email">Email</label>
               <input
-                
-                
+                onChange={handleInput}
+                value={formData.email}
                 className="px-3 py-2 outline-none border border-slate-700 bg-transparent rounded-md text-[#d0d2d6] focus:border-indigo-500 overflow-hidden"
                 type="text"
                 name="email"
@@ -30,6 +44,8 @@ const Login = () => {
             <div className="flex flex-col w-full gap-1 mb-5">
               <label htmlFor="password">Password</label>
               <input
+                onChange={handleInput}
+                value={formData.password}
                 className="px-3 py-2 outline-none border border-slate-700 bg-transparent rounded-md text-[#d0d2d6] focus:border-indigo-500 overflow-hidden"
                 type="password"
                 name="password"
@@ -38,9 +54,9 @@ const Login = () => {
                 required
               />
             </div>
-            <button
-              className="bg-blue-500 w-full hover:shadow-blue-500/20 hover:shadow-lg text-white rounded-md px-7 py-2 mb-3"
-            > Login
+            <button className="bg-blue-500 w-full hover:shadow-blue-500/20 hover:shadow-lg text-white rounded-md px-7 py-2 mb-3">
+              {" "}
+              Login
             </button>
             <div className="flex items-center mb-3 gap-3 justify-center">
               <p>
